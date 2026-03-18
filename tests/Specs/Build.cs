@@ -18,7 +18,6 @@ using System.IO;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
-using System.Text.Json;
 using Xunit;
 
 namespace tests.Specs;
@@ -816,7 +815,7 @@ public class Build
         fileSystem.File.Exists(menuItemsJson).Should().BeTrue("__generatedMenuItems.json should be generated");
 
         var jsonContent = fileSystem.File.ReadAllText(menuItemsJson);
-        var items = JsonDocument.Parse(jsonContent).RootElement.EnumerateArray().ToList();
+        var items = System.Text.Json.JsonDocument.Parse(jsonContent).RootElement.EnumerateArray().ToList();
 
         items.Should().HaveCount(3, "there should be one entry per markdown file");
 
@@ -873,7 +872,7 @@ public class Build
         fileSystem.File.Exists(menuItemsJson).Should().BeTrue("__generatedMenuItems.json should be generated");
 
         var jsonContent = fileSystem.File.ReadAllText(menuItemsJson);
-        var items = JsonDocument.Parse(jsonContent).RootElement.EnumerateArray().ToList();
+        var items = System.Text.Json.JsonDocument.Parse(jsonContent).RootElement.EnumerateArray().ToList();
 
         items.Should().HaveCount(3, "there should be one entry per markdown file");
 
